@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+
+  <style>
+   
+    :root {
+      --smaller: .75;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+
+    h1 {
+      font-weight: normal;
+      letter-spacing: .125rem;
+      text-transform: uppercase;
+      font-size: 30px !important;
+      padding-top: 20px;
+    }
+
+    #countdown {
+      background-image: url(https://custom.cvent.com/851C36FCAE944E17AB465BD57AFEB1E0/pix/279f55c730c748019e8441d09474008e.jpg); /* Set your background image URL */
+      background-size: cover;
+     
+      padding: 20px; 
+      margin-top: 20px; 
+      background-size: 430px;
+      background-repeat: no-repeat;
+      display: flex;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    }
+
+    li {
+      display: inline-block;
+      font-weight: bold;
+      color: rgb(19, 78, 168);
+      font-size: 15px !important;
+      list-style-type: none;
+      padding: 1em;
+      padding-top: 0px;
+      text-transform: uppercase;
+      padding-bottom: 20px;
+    }
+
+    li span {
+      display: block;
+      font-size: 42px !important;
+      font-weight: 500;
+    }
+
+    .emoji {
+      display: none;
+      padding: 1rem;
+    }
+
+    .emoji span {
+      font-size: 4rem;
+      padding: 0 .5rem;
+    }
+
+    @media all and (max-width: 768px) {
+      h1 {
+        font-size: calc(1.9rem * var(--smaller));
+      }
+
+      li {
+        font-size: calc(1.125rem * var(--smaller));
+      }
+
+      li span {
+        font-size: calc(3.375rem * var(--smaller));
+      }
+    }
+    #days,#hours,#minutes,#seconds{
+    background: linear-gradient(to bottom, #E1CDA8 50%, white 50%, #C99158 60%);
+   border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 id="headline"> </h1>
+  <div id="countdown">
+    <ul>
+      <li><span id="days" ></span>days</li>
+      <li><span id="hours"></span>HRS</li>
+      <li><span id="minutes"></span>MIN</li>
+      <li><span id="seconds"></span>SEC</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const second = 1000,
+          minute = second * 60,
+          hour = minute * 60,
+          day = hour * 24;
+
+    let today = new Date(),
+        dd = String(today.getDate()).padStart(2, "0"),
+        mm = String(today.getMonth() + 1).padStart(2, "0"),
+        yyyy = 2024, 
+        nextYear = yyyy + 1,
+        dayMonth = "5/19/", 
+        eventDay = dayMonth + yyyy;
+
+    today = mm + "/" + dd + "/" + yyyy;
+    if (today > eventDay) {
+      eventDay = dayMonth + nextYear;
+    }
+
+    const countDown = new Date(eventDay).getTime(),
+          x = setInterval(function() {
+            const now = new Date().getTime(),
+                  distance = countDown - now;
+
+            document.getElementById("days").innerText = Math.floor(distance / (day)),
+            document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+            document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+            document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+          }, 0)
+  }());
+</script>
+
+</body>
+</html>
